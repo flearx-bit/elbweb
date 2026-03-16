@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELBweb — Agence Web Montréal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5f0e8;
+  --cream2: #ede8de;
+  --cream3: #e4ddd0;
+  --ink: #1a1712;
+  --ink2: #4a4540;
+  --ink3: #9a9590;
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --white: #fdfaf5;
+  --border: rgba(26,23,18,0.1);
+  --border2: rgba(26,23,18,0.18);
+  --shadow: 0 2px 16px rgba(26,23,18,0.08);
+  --shadow-lg: 0 12px 48px rgba(26,23,18,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--ink);border-radius:2px}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 5%;height:66px;display:flex;align-items:center;justify-content:space-between;background:rgba(245,240,232,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.scrolled{box-shadow:var(--shadow)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.logo-anim{width:38px;height:38px;position:relative;flex-shrink:0}
+.logo-anim canvas{width:38px;height:38px}
+.logo-text{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;letter-spacing:-.01em;line-height:1}
+.logo-text span{color:var(--gold)}
+.logo-sub{font-size:.6rem;font-weight:400;color:var(--ink3);letter-spacing:.12em;text-transform:uppercase;margin-top:1px;font-family:'DM Sans',sans-serif}
+nav ul{list-style:none;display:flex;align-items:center;gap:30px}
+nav ul a{font-size:.875rem;font-weight:400;color:var(--ink2);text-decoration:none;transition:color .2s;letter-spacing:.01em}
+nav ul a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink)!important;color:var(--cream)!important;padding:9px 20px;border-radius:6px;font-weight:500!important;letter-spacing:.02em;transition:all .2s!important}
+.nav-cta:hover{background:var(--gold)!important;color:var(--ink)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--ink);border-radius:2px;transition:all .3s}
+
+/* ===== MOBILE MENU ===== */
+#mob-menu{display:none;position:fixed;inset:0;background:var(--white);z-index:199;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+#mob-menu.open{display:flex}
+#mob-menu a{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:var(--ink);text-decoration:none;transition:color .2s}
+#mob-menu a:hover{color:var(--gold)}
+.mob-x{position:absolute;top:20px;right:22px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink2)}
+
+/* ===== HERO ===== */
+#hero{min-height:100vh;display:flex;align-items:center;padding:100px 5% 60px;position:relative;overflow:hidden;background:var(--cream)}
+
+/* Texture papier */
+#hero::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.6;pointer-events:none}
+
+.hero-ring{position:absolute;right:-120px;top:50%;transform:translateY(-50%);width:560px;height:560px;border-radius:50%;border:1px solid rgba(26,23,18,0.06);pointer-events:none}
+.hero-ring::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(26,23,18,0.05)}
+.hero-ring::after{content:'';position:absolute;inset:80px;border-radius:50%;border:1px solid rgba(26,23,18,0.04)}
+
+.hero-inner{max-width:700px;position:relative;z-index:2}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border2);border-radius:4px;padding:6px 14px;font-size:.75rem;font-weight:500;color:var(--ink2);margin-bottom:30px;letter-spacing:.04em;text-transform:uppercase;animation:fadeUp .7s ease both}
+.tag-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5.2rem);font-weight:800;line-height:1.0;letter-spacing:-.02em;color:var(--ink);margin-bottom:24px;animation:fadeUp .7s .1s ease both}
+h1 em{font-style:italic;color:var(--gold);position:relative}
+.hero-sub{font-size:1.05rem;color:var(--ink2);line-height:1.7;max-width:440px;margin-bottom:40px;font-weight:300;animation:fadeUp .7s .2s ease both}
+.hero-btns{display:flex;align-items:center;gap:14px;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
+.btn-ink{background:var(--ink);color:var(--cream);padding:14px 28px;border-radius:6px;font-weight:500;font-size:.95rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .25s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.01em}
+.btn-ink:hover{background:var(--gold);color:var(--ink);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3)}
+.btn-outline{background:transparent;color:var(--ink);padding:14px 28px;border-radius:6px;font-weight:400;font-size:.95rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .25s;border:1.5px solid var(--border2)}
+.btn-outline:hover{border-color:var(--ink);background:rgba(26,23,18,.04)}
+
+.hero-stats{display:flex;gap:40px;margin-top:60px;padding-top:40px;border-top:1px solid var(--border);flex-wrap:wrap;animation:fadeUp .7s .4s ease both}
+.s-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+.s-num span{color:var(--gold)}
+.s-lbl{font-size:.75rem;color:var(--ink3);margin-top:3px;font-weight:400;letter-spacing:.04em;text-transform:uppercase}
+
+/* ===== TICKER ===== */
+.ticker{background:var(--ink);padding:14px 0;overflow:hidden}
+.ticker-t{display:flex;white-space:nowrap;animation:tick 30s linear infinite}
+.t-item{display:inline-flex;align-items:center;gap:14px;padding:0 30px;color:rgba(245,240,232,.4);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:400}
+.t-item b{color:var(--cream)}
+.t-sep{color:var(--gold);font-size:.5rem}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== SECTIONS ===== */
+section{padding:70px 5%}
+.s-eyebrow{font-size:.7rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-.02em;line-height:1.1;color:var(--ink)}
+.s-title em{font-style:italic;color:var(--gold)}
+.s-desc{color:var(--ink2);font-size:.95rem;line-height:1.7;max-width:440px;margin-top:10px;font-weight:300}
+
+/* ===== SERVICES ===== */
+#services{background:var(--white)}
+.svc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:48px;flex-wrap:wrap}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc{background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:30px;transition:all .3s;position:relative;overflow:hidden;cursor:default}
+.svc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));transform:scaleX(0);transition:transform .35s;transform-origin:left}
+.svc:hover{border-color:var(--border2);box-shadow:var(--shadow-lg);transform:translateY(-4px);background:var(--white)}
+.svc:hover::before{transform:scaleX(1)}
+.svc-ico{width:42px;height:42px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:18px}
+.svc h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:8px;color:var(--ink);letter-spacing:-.01em}
+.svc p{font-size:.855rem;color:var(--ink2);line-height:1.65;font-weight:300}
+.svc-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:16px}
+.pill{background:rgba(26,23,18,.06);border-radius:4px;padding:3px 9px;font-size:.68rem;color:var(--ink2);font-weight:500;letter-spacing:.02em}
+
+/* ===== PROCESS ===== */
+#process{background:var(--cream)}
+.proc-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:48px;align-items:start}
+.proc-steps{display:flex;flex-direction:column}
+.p-step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border);transition:all .3s;cursor:default}
+.p-step:first-child{padding-top:0}
+.p-step:last-child{border-bottom:none}
+.p-step:hover{padding-left:10px}
+.p-n{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:700;color:var(--gold);padding-top:2px;width:28px;flex-shrink:0;letter-spacing:.02em}
+.p-step h4{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;margin-bottom:5px;color:var(--ink)}
+.p-step p{font-size:.845rem;color:var(--ink2);line-height:1.65;font-weight:300}
+.proc-visual{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow)}
+.pv-head{margin-bottom:6px}
+.pv-label{font-size:.68rem;font-weight:500;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase}
+.pv-proj{font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:var(--ink);margin-top:2px}
+.pv-card{background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:13px 15px;display:flex;align-items:center;gap:12px;transition:box-shadow .2s}
+.pv-card:hover{box-shadow:var(--shadow)}
+.pv-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.pv-card h5{font-weight:500;font-size:.83rem;color:var(--ink);margin-bottom:1px}
+.pv-card span{font-size:.73rem;color:var(--ink3)}
+.pv-badge{margin-left:auto;font-size:.65rem;font-weight:600;padding:3px 8px;border-radius:4px;white-space:nowrap;letter-spacing:.03em}
+.done{background:#dcfce7;color:#15803d}
+.active{background:rgba(201,168,76,.15);color:#8a6b1a}
+.soon{background:rgba(26,23,18,.07);color:var(--ink3)}
+
+/* ===== PRICING ===== */
+#pricing{background:var(--white)}
+.price-head{text-align:center;margin-bottom:48px}
+.price-head .s-desc{margin:10px auto 0}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+.plan{background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:30px;transition:all .3s}
+.plan:hover:not(.plan-f){border-color:var(--border2);box-shadow:var(--shadow)}
+.plan-f{background:var(--ink);border-color:var(--ink);box-shadow:var(--shadow-lg);transform:scale(1.03)}
+.p-name{font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.plan-f .p-name{color:rgba(245,240,232,.4)}
+.p-pop{display:inline-block;background:var(--gold);color:var(--ink);font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:4px;margin-bottom:6px}
+.p-price{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;letter-spacing:-.03em;color:var(--ink);margin-bottom:4px}
+.plan-f .p-price{color:var(--cream)}
+.p-price sup{font-size:1.1rem;font-weight:400;font-family:'DM Sans',sans-serif}
+.p-desc{font-size:.835rem;color:var(--ink2);line-height:1.55;font-weight:300;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.plan-f .p-desc{color:rgba(245,240,232,.5);border-color:rgba(245,240,232,.1)}
+.p-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+.p-feats li{display:flex;align-items:flex-start;gap:8px;font-size:.845rem;color:var(--ink2);font-weight:300}
+.plan-f .p-feats li{color:rgba(245,240,232,.7)}
+.ck{color:var(--gold);font-size:.8rem;margin-top:1px;flex-shrink:0}
+.p-btn{width:100%;padding:12px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:.875rem;cursor:pointer;border:none;transition:all .25s;letter-spacing:.02em}
+.p-btn-o{background:transparent;border:1.5px solid var(--border2)!important;color:var(--ink)}
+.p-btn-o:hover{border-color:var(--ink)!important;background:rgba(26,23,18,.04)}
+.p-btn-g{background:var(--gold);color:var(--ink)}
+.p-btn-g:hover{background:var(--gold2);box-shadow:0 6px 20px rgba(201,168,76,.35)}
+.p-btn-w{background:var(--cream);color:var(--ink)}
+.p-btn-w:hover{background:var(--gold);color:var(--ink)}
+
+/* ===== TECH ===== */
+#tech{background:var(--cream)}
+.tech-head{text-align:center;margin-bottom:44px}
+.tech-head .s-desc{margin:10px auto 0}
+.tech-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.t-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 10px;text-align:center;transition:all .25s;cursor:default}
+.t-card:hover{border-color:var(--gold);box-shadow:var(--shadow);transform:translateY(-2px)}
+.t-ico{font-size:1.7rem;margin-bottom:6px}
+.t-name{font-size:.7rem;font-weight:500;color:var(--ink2);letter-spacing:.02em}
+
+/* ===== CONTACT ===== */
+#contact{background:var(--white)}
+.contact-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:60px;margin-top:48px;align-items:start}
+.c-left h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color:var(--ink)}
+.c-left p{font-size:.875rem;color:var(--ink2);line-height:1.7;margin-bottom:28px;font-weight:300}
+.c-items{display:flex;flex-direction:column;gap:10px}
+.c-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--cream);border:1px solid var(--border);border-radius:8px;transition:border-color .2s}
+.c-item:hover{border-color:var(--gold)}
+.c-ico{width:34px;height:34px;background:rgba(201,168,76,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.c-item strong{display:block;font-size:.78rem;font-weight:600;color:var(--ink);letter-spacing:.02em}
+.c-item span{font-size:.8rem;color:var(--ink2);font-weight:300}
+.form-wrap{background:var(--cream);border:1px solid var(--border);border-radius:16px;padding:32px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f-g{margin-bottom:14px}
+.f-g label{display:block;font-size:.73rem;font-weight:500;color:var(--ink2);margin-bottom:5px;letter-spacing:.04em;text-transform:uppercase}
+.f-g input,.f-g select,.f-g textarea{width:100%;background:var(--white);border:1px solid var(--border2);border-radius:7px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:.875rem;color:var(--ink);outline:none;transition:border-color .25s,box-shadow .25s;appearance:none;font-weight:300}
+.f-g input:focus,.f-g select:focus,.f-g textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.12)}
+.f-g input::placeholder,.f-g textarea::placeholder{color:var(--ink3)}
+.f-g select option{background:var(--white)}
+.f-g textarea{resize:none;height:90px}
+.f-submit{width:100%;padding:14px;background:var(--ink);color:var(--cream);border:none;border-radius:7px;font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all .25s;letter-spacing:.01em}
+.f-submit:hover{background:var(--gold);color:var(--ink);box-shadow:0 6px 24px rgba(201,168,76,.3);transform:translateY(-1px)}
+.f-note{font-size:.72rem;color:var(--ink3);text-align:center;margin-top:8px}
+.success-wrap{display:none;text-align:center;padding:44px 16px}
+.s-ico{font-size:2.5rem;margin-bottom:10px}
+.success-wrap h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.success-wrap p{font-size:.855rem;color:var(--ink2);font-weight:300}
+
+/* ===== FOOTER ===== */
+footer{background:var(--ink);color:rgba(245,240,232,.55);padding:52px 5% 24px}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;margin-bottom:40px}
+.f-brand .logo{color:var(--cream);margin-bottom:12px}
+.f-brand .logo-mark{background:rgba(245,240,232,.08)}
+.f-brand p{font-size:.83rem;line-height:1.7;font-weight:300}
+.f-col h5{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:700;color:var(--cream);margin-bottom:14px;letter-spacing:.01em}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.f-col ul a{font-size:.83rem;color:rgba(245,240,232,.4);text-decoration:none;transition:color .2s;font-weight:300}
+.f-col ul a:hover{color:rgba(245,240,232,.9)}
+.f-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid rgba(245,240,232,.08);flex-wrap:wrap;gap:12px}
+.f-bottom p{font-size:.78rem}
+.f-links{display:flex;gap:18px}
+.f-links a{font-size:.78rem;color:rgba(245,240,232,.3);text-decoration:none;transition:color .2s}
+.f-links a:hover{color:rgba(245,240,232,.8)}
+
+/* ===== CHATBOT ===== */
+#bot-btn{position:fixed;bottom:22px;right:22px;z-index:998;width:52px;height:52px;background:var(--ink);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);transition:all .25s;font-size:1.25rem}
+#bot-btn:hover{background:var(--gold);transform:scale(1.05)}
+.b-live{position:absolute;top:1px;right:1px;width:12px;height:12px;background:#22c55e;border-radius:50%;border:2px solid var(--cream);animation:pulse 2s ease infinite}
+#chatbox{position:fixed;bottom:84px;right:22px;width:330px;background:var(--white);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-lg);z-index:997;display:none;flex-direction:column;overflow:hidden}
+#chatbox.open{display:flex;animation:popIn .25s cubic-bezier(.34,1.56,.64,1)}
+@keyframes popIn{from{transform:scale(.85) translateY(10px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.cb-head{background:var(--ink);padding:16px 18px;display:flex;align-items:center;gap:12px}
+.cb-av{width:36px;height:36px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.cb-info strong{display:block;font-size:.875rem;font-weight:500;color:var(--cream)}
+.cb-status{font-size:.7rem;color:#4ade80;display:flex;align-items:center;gap:4px}
+.cb-status::before{content:'';width:5px;height:5px;border-radius:50%;background:#4ade80}
+.cb-x{margin-left:auto;background:none;border:none;color:rgba(245,240,232,.4);cursor:pointer;font-size:1.05rem;transition:color .2s}
+.cb-x:hover{color:var(--cream)}
+.cb-msgs{flex:1;padding:16px;display:flex;flex-direction:column;gap:9px;overflow-y:auto;max-height:260px;min-height:140px}
+.msg{max-width:88%;padding:9px 13px;border-radius:12px;font-size:.845rem;line-height:1.5;animation:msgIn .25s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.msg.bot{background:var(--cream);border:1px solid var(--border);color:var(--ink);align-self:flex-start;border-radius:3px 12px 12px 12px;font-weight:300}
+.msg.user{background:var(--ink);color:var(--cream);align-self:flex-end;border-radius:12px 12px 3px 12px}
+.cb-chips{padding:0 16px 8px;display:flex;flex-wrap:wrap;gap:5px}
+.cb-chip{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:#8a6b1a;font-size:.74rem;font-weight:500;padding:5px 11px;border-radius:4px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.cb-chip:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.cb-inp-row{padding:10px 14px 14px;display:flex;gap:8px;border-top:1px solid var(--border)}
+.cb-inp{flex:1;background:var(--cream);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:.83rem;color:var(--ink);outline:none;transition:border-color .2s;font-weight:300}
+.cb-inp:focus{border-color:var(--gold)}
+.cb-inp::placeholder{color:var(--ink3)}
+.cb-send{width:32px;height:32px;background:var(--ink);border:none;border-radius:6px;color:var(--cream);font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.cb-send:hover{background:var(--gold);color:var(--ink)}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){.svc-grid{grid-template-columns:1fr 1fr}.tech-grid{grid-template-columns:repeat(4,1fr)}.f-grid{grid-template-columns:1fr 1fr;gap:28px}}
+@media(max-width:768px){nav ul{display:none}.hamburger{display:flex}section{padding:52px 5%}h1{font-size:2.3rem}.svc-grid{grid-template-columns:1fr}.price-grid{grid-template-columns:1fr}.plan-f{transform:none}.contact-layout{grid-template-columns:1fr;gap:32px}.f-row{grid-template-columns:1fr}.tech-grid{grid-template-columns:repeat(3,1fr)}.f-grid{grid-template-columns:1fr;gap:24px}.svc-head{flex-direction:column;align-items:flex-start}.proc-layout{grid-template-columns:1fr}.hero-stats{gap:22px}#chatbox{width:calc(100vw - 28px);right:14px}}
+@media(max-width:480px){.hero-btns{flex-direction:column;align-items:stretch}.tech-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#hero" class="logo">
+    <div class="logo-anim"><canvas id="logo-canvas" width="76" height="76"></canvas></div>
+    <div>
+      <div class="logo-text">ELB<span>web</span></div>
+      <div class="logo-sub">Agence Web · Montreal</div>
+    </div>
+  </a>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Processus</a></li>
+    <li><a href="#pricing">Tarifs</a></li>
+    <li><a href="#tech">Stack</a></li>
+    <li><a href="#contact" class="nav-cta">Devis gratuit</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<div id="mob-menu">
+  <button class="mob-x" onclick="toggleMenu()">✕</button>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#process" onclick="toggleMenu()">Processus</a>
+  <a href="#pricing" onclick="toggleMenu()">Tarifs</a>
+  <a href="#tech" onclick="toggleMenu()">Stack</a>
+  <a href="#contact" onclick="toggleMenu()" style="color:var(--gold)">Devis gratuit →</a>
+</div>
+
+<section id="hero">
+  <div class="hero-ring"></div>
+  <div class="hero-inner">
+    <div class="hero-tag"><span class="tag-dot"></span>Montréal · Canada · International</div>
+    <h1>Des sites web qui<br>travaillent pour <em>vous.</em></h1>
+    <p class="hero-sub">ELBweb conçoit des sites performants, des boutiques en ligne et des applications sur mesure — avec une qualité d'exécution qui fait la différence.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-ink">Lancer mon projet →</a>
+      <a href="#services" class="btn-outline">Nos services</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="s-num" data-target="200">0<span>+</span></div><div class="s-lbl">Projets livrés</div></div>
+      <div><div class="s-num" data-target="98">0<span>%</span></div><div class="s-lbl">Clients satisfaits</div></div>
+      <div><div class="s-num">24<span>/7</span></div><div class="s-lbl">Support</div></div>
+      <div><div class="s-num" data-target="7">0<span> jours</span></div><div class="s-lbl">Délai moyen</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-t">
+    <span class="t-item"><b>Site Vitrine</b><span class="t-sep">✦</span></span><span class="t-item"><b>E-Commerce</b><span class="t-sep">✦</span></span><span class="t-item"><b>Application Web</b><span class="t-sep">✦</span></span><span class="t-item"><b>SEO</b><span class="t-sep">✦</span></span><span class="t-item"><b>Design UI/UX</b><span class="t-sep">✦</span></span><span class="t-item"><b>Maintenance</b><span class="t-sep">✦</span></span><span class="t-item"><b>Hébergement</b><span class="t-sep">✦</span></span><span class="t-item"><b>Identité Visuelle</b><span class="t-sep">✦</span></span><span class="t-item"><b>Site Vitrine</b><span class="t-sep">✦</span></span><span class="t-item"><b>E-Commerce</b><span class="t-sep">✦</span></span><span class="t-item"><b>Application Web</b><span class="t-sep">✦</span></span><span class="t-item"><b>SEO</b><span class="t-sep">✦</span></span><span class="t-item"><b>Design UI/UX</b><span class="t-sep">✦</span></span><span class="t-item"><b>Maintenance</b><span class="t-sep">✦</span></span><span class="t-item"><b>Hébergement</b><span class="t-sep">✦</span></span><span class="t-item"><b>Identité Visuelle</b><span class="t-sep">✦</span></span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="svc-head">
+    <div><div class="s-eyebrow">Services</div><h2 class="s-title">Tout pour <em>réussir</em><br>votre présence web</h2></div>
+    <p class="s-desc">De la conception à la mise en ligne — chaque étape gérée avec soin et expertise.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc reveal"><div class="svc-ico">🎨</div><h3>Site Vitrine</h3><p>Un site professionnel qui reflète votre image et convertit vos visiteurs en clients dès la première impression.</p><div class="svc-pills"><span class="pill">Design sur mesure</span><span class="pill">Mobile first</span><span class="pill">Rapide</span></div></div>
+    <div class="svc reveal"><div class="svc-ico">🛒</div><h3>E-Commerce</h3><p>Boutiques complètes avec gestion des stocks, paiements sécurisés et tableau de bord intuitif.</p><div class="svc-pills"><span class="pill">Stripe / PayPal</span><span class="pill">Inventaire</span><span class="pill">Rapports</span></div></div>
+    <div class="svc reveal"><div class="svc-ico">⚡</div><h3>Application Web</h3><p>Apps sur mesure avec authentification, API, base de données et logique métier avancée.</p><div class="svc-pills"><span class="pill">React / Next.js</span><span class="pill">API REST</span><span class="pill">Scalable</span></div></div>
+    <div class="svc reveal"><div class="svc-ico">📈</div><h3>SEO & Performance</h3><p>Dominez Google avec une stratégie SEO complète et des optimisations techniques avancées.</p><div class="svc-pills"><span class="pill">Audit SEO</span><span class="pill">Core Web Vitals</span><span class="pill">Rapport mensuel</span></div></div>
+    <div class="svc reveal"><div class="svc-ico">🔧</div><h3>Maintenance & Support</h3><p>Votre site entre de bonnes mains. Mises à jour, sauvegardes et support réactif 24/7.</p><div class="svc-pills"><span class="pill">Sauvegardes auto</span><span class="pill">Support 24/7</span><span class="pill">Monitoring</span></div></div>
+    <div class="svc reveal"><div class="svc-ico">🎭</div><h3>Identité Visuelle</h3><p>Logo, charte graphique, brandbook — construisez une marque mémorable et cohérente.</p><div class="svc-pills"><span class="pill">Logo</span><span class="pill">Charte graphique</span><span class="pill">Brandbook</span></div></div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="s-eyebrow">Processus</div>
+  <h2 class="s-title">Simple, transparent,<br><em>efficace</em></h2>
+  <div class="proc-layout">
+    <div class="proc-steps">
+      <div class="p-step reveal"><div class="p-n">01</div><div><h4>Découverte & Stratégie</h4><p>On comprend votre business, vos objectifs et votre audience. Un brief détaillé est établi avec un devis transparent.</p></div></div>
+      <div class="p-step reveal"><div class="p-n">02</div><div><h4>Design & Prototypage</h4><p>Nos designers créent des maquettes haute-fidélité. Vous validez avant qu'une seule ligne de code soit écrite.</p></div></div>
+      <div class="p-step reveal"><div class="p-n">03</div><div><h4>Développement & Tests</h4><p>Développement agile avec démos régulières. Tests complets avant toute mise en ligne.</p></div></div>
+      <div class="p-step reveal"><div class="p-n">04</div><div><h4>Lancement & Suivi</h4><p>Déploiement soigné, formation incluse, suivi post-lancement. Votre succès est notre priorité.</p></div></div>
+    </div>
+    <div class="proc-visual reveal">
+      <div class="pv-head"><div class="pv-label">Projet en cours</div><div class="pv-proj">Site vitrine — Boutique Flore</div></div>
+      <div class="pv-card"><div class="pv-ico" style="background:#dcfce7">✅</div><div><h5>Brief & maquettes</h5><span>Validé par le client</span></div><span class="pv-badge done">Fait</span></div>
+      <div class="pv-card"><div class="pv-ico" style="background:rgba(201,168,76,.15)">💻</div><div><h5>Développement front-end</h5><span>En cours — 72%</span></div><span class="pv-badge active">Actif</span></div>
+      <div class="pv-card"><div class="pv-ico" style="background:rgba(26,23,18,.06)">🔍</div><div><h5>Tests & QA</h5><span>Démarrage lundi</span></div><span class="pv-badge soon">Bientôt</span></div>
+      <div class="pv-card"><div class="pv-ico" style="background:rgba(26,23,18,.06)">🚀</div><div><h5>Mise en ligne</h5><span>Prévu 22 mars</span></div><span class="pv-badge soon">Bientôt</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="price-head">
+    <div class="s-eyebrow">Tarifs</div>
+    <h2 class="s-title">Des forfaits <em>clairs,</em><br>sans surprises</h2>
+    <p class="s-desc">Hébergement 1 an, SSL et formation inclus dans tous les forfaits.</p>
+  </div>
+  <div class="price-grid">
+    <div class="plan reveal">
+      <div class="p-name">Essentiel</div>
+      <div class="p-price"><sup>$</sup>1 200</div>
+      <p class="p-desc">Pour les entrepreneurs qui veulent une présence web professionnelle et soignée.</p>
+      <ul class="p-feats">
+        <li><span class="ck">✓</span> Site vitrine jusqu'à 5 pages</li>
+        <li><span class="ck">✓</span> Design responsive mobile</li>
+        <li><span class="ck">✓</span> Formulaire de contact</li>
+        <li><span class="ck">✓</span> SEO de base</li>
+        <li><span class="ck">✓</span> SSL + Hébergement 1 an</li>
+        <li><span class="ck">✓</span> Livraison en 7 jours</li>
+      </ul>
+      <button class="p-btn p-btn-o" onclick="goContact()">Commencer →</button>
+    </div>
+    <div class="plan plan-f reveal">
+      <div class="p-pop">Le plus populaire</div>
+      <div class="p-name">Professionnel</div>
+      <div class="p-price"><sup>$</sup>3 500</div>
+      <p class="p-desc">Pour les PME qui veulent un site performant avec fonctionnalités avancées.</p>
+      <ul class="p-feats">
+        <li><span class="ck">✓</span> Jusqu'à 15 pages</li>
+        <li><span class="ck">✓</span> Design premium sur mesure</li>
+        <li><span class="ck">✓</span> Blog & actualités</li>
+        <li><span class="ck">✓</span> SEO complet + analytics</li>
+        <li><span class="ck">✓</span> Chatbot support intégré</li>
+        <li><span class="ck">✓</span> Support 6 mois inclus</li>
+        <li><span class="ck">✓</span> Rapport mensuel</li>
+      </ul>
+      <button class="p-btn p-btn-g" onclick="goContact()">Je veux ce forfait →</button>
+    </div>
+    <div class="plan reveal">
+      <div class="p-name">Entreprise</div>
+      <div class="p-price" style="font-size:1.9rem">Sur devis</div>
+      <p class="p-desc">Pour les projets complexes : e-commerce, apps web et intégrations API.</p>
+      <ul class="p-feats">
+        <li><span class="ck">✓</span> Développement sur mesure</li>
+        <li><span class="ck">✓</span> E-commerce & paiements</li>
+        <li><span class="ck">✓</span> API & intégrations tierces</li>
+        <li><span class="ck">✓</span> Architecture scalable</li>
+        <li><span class="ck">✓</span> Support 24/7 dédié</li>
+        <li><span class="ck">✓</span> SLA garanti</li>
+        <li><span class="ck">✓</span> Chef de projet attitré</li>
+      </ul>
+      <button class="p-btn p-btn-o" onclick="goContact()">Nous contacter →</button>
+    </div>
+  </div>
+</section>
+
+<section id="tech">
+  <div class="tech-head">
+    <div class="s-eyebrow">Technologies</div>
+    <h2 class="s-title">Stack <em>moderne</em> & éprouvé</h2>
+    <p class="s-desc">Les meilleures technologies pour garantir performance, sécurité et pérennité.</p>
+  </div>
+  <div class="tech-grid">
+    <div class="t-card reveal"><div class="t-ico">⚛️</div><div class="t-name">React</div></div>
+    <div class="t-card reveal"><div class="t-ico">🔺</div><div class="t-name">Next.js</div></div>
+    <div class="t-card reveal"><div class="t-ico">🟢</div><div class="t-name">Node.js</div></div>
+    <div class="t-card reveal"><div class="t-ico">🐘</div><div class="t-name">PostgreSQL</div></div>
+    <div class="t-card reveal"><div class="t-ico">🔥</div><div class="t-name">Firebase</div></div>
+    <div class="t-card reveal"><div class="t-ico">☁️</div><div class="t-name">AWS</div></div>
+    <div class="t-card reveal"><div class="t-ico">🐳</div><div class="t-name">Docker</div></div>
+    <div class="t-card reveal"><div class="t-ico">🎨</div><div class="t-name">Figma</div></div>
+    <div class="t-card reveal"><div class="t-ico">🛒</div><div class="t-name">Shopify</div></div>
+    <div class="t-card reveal"><div class="t-ico">📦</div><div class="t-name">WordPress</div></div>
+    <div class="t-card reveal"><div class="t-ico">💳</div><div class="t-name">Stripe</div></div>
+    <div class="t-card reveal"><div class="t-ico">📊</div><div class="t-name">Analytics</div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="s-eyebrow">Demande de service</div>
+  <h2 class="s-title">Parlons de <em>votre</em> projet</h2>
+  <div class="contact-layout">
+    <div class="c-left reveal">
+      <h3>Prêt à démarrer ?</h3>
+      <p>Remplissez le formulaire et nous vous recontactons dans les 24 heures avec une proposition personnalisée et un devis détaillé — sans engagement.</p>
+      <div class="c-items">
+        <div class="c-item"><div class="c-ico">📧</div><div><strong>Email</strong><span>hello@elbweb.ca</span></div></div>
+        <div class="c-item"><div class="c-ico">📞</div><div><strong>Téléphone</strong><span>+1 (514) 555-0199</span></div></div>
+        <div class="c-item"><div class="c-ico">📍</div><div><strong>Bureau</strong><span>Montréal, Québec, Canada</span></div></div>
+        <div class="c-item"><div class="c-ico">⏱</div><div><strong>Réponse garantie</strong><span>Sous 24 heures ouvrables</span></div></div>
+      </div>
+    </div>
+    <div class="form-wrap reveal">
+      <div id="form-inner">
+        <div class="f-row">
+          <div class="f-g"><label>Prénom *</label><input id="f-prenom" type="text" placeholder="Jean"></div>
+          <div class="f-g"><label>Nom *</label><input id="f-nom" type="text" placeholder="Tremblay"></div>
+        </div>
+        <div class="f-g"><label>Courriel *</label><input id="f-email" type="email" placeholder="jean@exemple.com"></div>
+        <div class="f-row">
+          <div class="f-g"><label>Entreprise</label><input type="text" placeholder="Mon Entreprise Inc."></div>
+          <div class="f-g"><label>Téléphone</label><input type="tel" placeholder="+1 (514) 555-0100"></div>
+        </div>
+        <div class="f-g"><label>Type de projet *</label>
+          <select id="f-type"><option value="" disabled selected>Sélectionnez...</option><option>Site vitrine</option><option>E-Commerce</option><option>Application web</option><option>Refonte de site existant</option><option>SEO & Marketing</option><option>Maintenance & Support</option><option>Identité visuelle</option><option>Autre</option></select>
+        </div>
+        <div class="f-g"><label>Budget approximatif</label>
+          <select><option value="" disabled selected>Sélectionnez...</option><option>Moins de 1 000 $</option><option>1 000 $ – 3 000 $</option><option>3 000 $ – 8 000 $</option><option>8 000 $ – 20 000 $</option><option>20 000 $+</option></select>
+        </div>
+        <div class="f-g"><label>Décrivez votre projet</label><textarea id="f-msg" placeholder="Parlez-nous de votre projet, vos objectifs, votre audience cible..."></textarea></div>
+        <button class="f-submit" onclick="submitForm()">Envoyer ma demande →</button>
+        <p class="f-note">🔒 Vos données sont confidentielles. Aucun spam.</p>
+      </div>
+      <div class="success-wrap" id="success-wrap">
+        <div class="s-ico">✅</div>
+        <h3>Demande reçue !</h3>
+        <p>Nous vous recontacterons dans les 24 heures avec une proposition personnalisée.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-grid">
+    <div class="f-brand">
+      <a href="#hero" class="logo">
+        <div class="logo-mark" style="width:32px;height:32px;background:rgba(245,240,232,.08);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M3 15L10 5l7 10" stroke="#f5f0e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 15L10 10l3.5 5" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div><div class="logo-text" style="color:var(--cream)">ELB<span>web</span></div></div>
+      </a>
+      <p style="margin-top:12px">Agence web premium basée à Montréal. Nous créons des expériences digitales qui font la différence.</p>
+    </div>
+    <div class="f-col"><h5>Services</h5><ul><li><a href="#services">Site Vitrine</a></li><li><a href="#services">E-Commerce</a></li><li><a href="#services">Application Web</a></li><li><a href="#services">SEO & Performance</a></li><li><a href="#services">Maintenance</a></li></ul></div>
+    <div class="f-col"><h5>Agence</h5><ul><li><a href="#process">Notre processus</a></li><li><a href="#pricing">Tarifs</a></li><li><a href="#tech">Technologies</a></li><li><a href="#contact">Nous contacter</a></li></ul></div>
+    <div class="f-col"><h5>Contact</h5><ul><li><a href="mailto:hello@elbweb.ca">hello@elbweb.ca</a></li><li><a href="#">+1 (514) 555-0199</a></li><li><a href="#">Montréal, QC</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="f-bottom">
+    <p>© 2026 ELBweb. Tous droits réservés.</p>
+    <div class="f-links"><a href="#">Confidentialité</a><a href="#">Conditions</a></div>
+  </div>
+</footer>
+
+<button id="bot-btn" onclick="toggleBot()"><div class="b-live"></div>💬</button>
+<div id="chatbox">
+  <div class="cb-head">
+    <div class="cb-av">🤖</div>
+    <div class="cb-info"><strong>Alex — Support ELBweb</strong><div class="cb-status">En ligne maintenant</div></div>
+    <button class="cb-x" onclick="toggleBot()">✕</button>
+  </div>
+  <div class="cb-msgs" id="cb-msgs"><div class="msg bot">Bonjour ! 👋 Je suis Alex, l'assistant de ELBweb. Comment puis-je vous aider ?</div></div>
+  <div class="cb-chips" id="cb-chips">
+    <button class="cb-chip" onclick="chip('💰 Demander un devis')">💰 Devis</button>
+    <button class="cb-chip" onclick="chip('⏱ Délais')">⏱ Délais</button>
+    <button class="cb-chip" onclick="chip('📞 Appeler')">📞 Appeler</button>
+    <button class="cb-chip" onclick="chip('🛠 Services')">🛠 Services</button>
+  </div>
+  <div class="cb-inp-row">
+    <input class="cb-inp" id="cb-in" placeholder="Votre message..." onkeydown="if(event.key==='Enter')sendMsg()">
+    <button class="cb-send" onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<script>
+/* ===== LOGO ANIMÉ ===== */
+const canvas = document.getElementById('logo-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = 76; canvas.height = 76;
+
+const CREAM = '#f5f0e8';
+const INK = '#1a1712';
+const GOLD = '#c9a84c';
+
+let t = 0;
+// Nœuds représentant une structure de site web en construction
+const nodes = [
+  {x:38, y:12, r:4, built:0, delay:0},   // header
+  {x:15, y:35, r:3, built:0, delay:18},  // nav left
+  {x:38, y:35, r:3, built:0, delay:28}, // nav mid
+  {x:61, y:35, r:3, built:0, delay:38}, // nav right
+  {x:22, y:58, r:3.5, built:0, delay:50},// content left
+  {x:54, y:58, r:3.5, built:0, delay:60},// content right
+  {x:38, y:72, r:2.5, built:0, delay:72},// footer
+];
+const edges = [
+  [0,1],[0,2],[0,3],
+  [1,4],[3,5],
+  [4,6],[5,6],
+];
+
+function drawLogo(time) {
+  t = time * 0.001;
+  ctx.clearRect(0,0,76,76);
+
+  // Fond
+  ctx.fillStyle = INK;
+  ctx.beginPath();
+  ctx.roundRect(0,0,76,76,10);
+  ctx.fill();
+
+  // Pulse global
+  const pulse = 0.5 + 0.5 * Math.sin(t * 1.5);
+
+  // Mise à jour built des nœuds (animation de construction cyclique)
+  const cycle = (t % 8) / 8; // cycle de 8 secondes
+  nodes.forEach((n,i) => {
+    const start = n.delay / 100;
+    n.built = Math.min(1, Math.max(0, (cycle - start) / 0.15));
+    // reset après cycle complet
+    if(cycle < 0.05) n.built = 0;
+  });
+
+  // Dessiner les connexions (lignes)
+  edges.forEach(([a,b]) => {
+    const na = nodes[a], nb = nodes[b];
+    const prog = Math.min(na.built, nb.built);
+    if(prog <= 0) return;
+    ctx.save();
+    ctx.globalAlpha = prog * 0.5;
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 0.8;
+    ctx.setLineDash([3,3]);
+    ctx.lineDashOffset = -t * 8;
+    ctx.beginPath();
+    // dessiner seulement la portion construite
+    const mx = na.x + (nb.x - na.x) * prog;
+    const my = na.y + (nb.y - na.y) * prog;
+    ctx.moveTo(na.x, na.y);
+    ctx.lineTo(mx, my);
+    ctx.stroke();
+    ctx.restore();
+  });
+
+  // Dessiner les nœuds
+  nodes.forEach((n,i) => {
+    if(n.built <= 0) return;
+    const scale = n.built;
+    const glow = i === 0 ? 0.4 + 0.3 * pulse : 0.2;
+
+    // Glow doré
+    ctx.save();
+    ctx.globalAlpha = glow * scale;
+    const grad = ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*3);
+    grad.addColorStop(0, GOLD);
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r*3, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+
+    // Cercle
+    ctx.save();
+    ctx.globalAlpha = scale;
+    ctx.fillStyle = i === 0 ? GOLD : CREAM;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r * scale, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+
+    // Anneau extérieur pour le nœud principal
+    if(i === 0 && n.built > 0.8) {
+      ctx.save();
+      ctx.globalAlpha = 0.3 * pulse * n.built;
+      ctx.strokeStyle = GOLD;
+      ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 2.5, 0, Math.PI*2);
+      ctx.stroke();
+      ctx.restore();
+    }
+  });
+
+  // Curseur animé (simule un clic en train de coder)
+  const cursorPhase = (t * 0.7) % 1;
+  if(cursorPhase < 0.7) {
+    const ci = Math.floor(t * 0.4) % nodes.length;
+    const cn = nodes[ci];
+    ctx.save();
+    ctx.globalAlpha = (0.7 - cursorPhase) / 0.7 * 0.8;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    // petit curseur pointeur
+    ctx.moveTo(cn.x + 6, cn.y + 10);
+    ctx.lineTo(cn.x + 6, cn.y + 3);
+    ctx.lineTo(cn.x + 10, cn.y + 6);
+    ctx.lineTo(cn.x + 8, cn.y + 7);
+    ctx.lineTo(cn.x + 11, cn.y + 10);
+    ctx.lineTo(cn.x + 9.5, cn.y + 10.5);
+    ctx.lineTo(cn.x + 6.5, cn.y + 7.5);
+    ctx.lineTo(cn.x + 6, cn.y + 10);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  requestAnimationFrame(drawLogo);
+}
+requestAnimationFrame(drawLogo);
+
+/* ===== NAV ===== */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>10));
+function toggleMenu(){document.getElementById('mob-menu').classList.toggle('open')}
+
+/* ===== REVEAL ===== */
+const io=new IntersectionObserver(e=>e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('in'),i*70)}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ===== COUNTERS ===== */
+function countUp(el){
+  const t=+el.dataset.target; if(!t)return;
+  const s=el.innerHTML.replace(/[0-9]/g,'');
+  let v=0; const inc=t/75;
+  const tm=setInterval(()=>{v=Math.min(v+inc,t);el.innerHTML=Math.floor(v)+s;if(v>=t)clearInterval(tm)},16);
+}
+const so=new IntersectionObserver(e=>{if(e[0].isIntersecting){document.querySelectorAll('.s-num[data-target]').forEach(countUp);so.disconnect()}},{threshold:.5});
+const se=document.querySelector('.hero-stats'); if(se)so.observe(se);
+
+/* ===== FORM ===== */
+function goContact(){document.getElementById('contact').scrollIntoView({behavior:'smooth'})}
+function submitForm(){
+  const p=document.getElementById('f-prenom').value,e=document.getElementById('f-email').value,t=document.getElementById('f-type').value;
+  if(!p||!e||!t){alert('Veuillez remplir les champs obligatoires (*).');return}
+  document.getElementById('form-inner').style.display='none';
+  document.getElementById('success-wrap').style.display='block';
+}
+
+/* ===== CHATBOT ===== */
+let bo=false;
+const rep={
+  devis:'Parfait ! Remplissez notre formulaire de contact en bas de page. Nous répondons sous 24h avec une proposition détaillée. 📋',
+  délai:'Délais typiques :\n• Site vitrine : 5–10 jours\n• E-commerce : 15–30 jours\n• App web : 30–90 jours ✅',
+  appel:'Joignez-nous au +1 (514) 555-0199, lun–ven 9h–18h. Vous pouvez aussi laisser votre numéro dans le formulaire ! 📞',
+  service:'Nos services : Site vitrine, E-commerce, App web, SEO, Maintenance & Support, Identité visuelle. Lequel vous intéresse ? 🚀',
+  def:'Pour une réponse précise, contactez-nous via le formulaire ou au +1 (514) 555-0199. On est disponible 24/7 ! 😊'
+};
+function getR(m){m=m.toLowerCase();if(m.includes('devis')||m.includes('prix')||m.includes('tarif')||m.includes('💰'))return rep.devis;if(m.includes('délai')||m.includes('temps')||m.includes('⏱'))return rep.délai;if(m.includes('appel')||m.includes('📞'))return rep.appel;if(m.includes('service')||m.includes('🛠'))return rep.service;return rep.def}
+function addMsg(t,type){const el=document.createElement('div');el.className='msg '+type;el.textContent=t;const m=document.getElementById('cb-msgs');m.appendChild(el);m.scrollTop=m.scrollHeight}
+function toggleBot(){bo=!bo;const b=document.getElementById('chatbox'),btn=document.getElementById('bot-btn');if(bo){b.classList.add('open');btn.innerHTML='<div class="b-live"></div>✕'}else{b.classList.remove('open');btn.innerHTML='<div class="b-live"></div>💬'}}
+function sendMsg(){const i=document.getElementById('cb-in'),t=i.value.trim();if(!t)return;addMsg(t,'user');i.value='';document.getElementById('cb-chips').style.display='none';setTimeout(()=>addMsg(getR(t),'bot'),600)}
+function chip(t){addMsg(t,'user');document.getElementById('cb-chips').style.display='none';setTimeout(()=>addMsg(getR(t),'bot'),600)}
+</script>
+</body>
+</html>
