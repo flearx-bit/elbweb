@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ELBweb — Agence Web Montréal</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #050810;
@@ -42,45 +42,208 @@ body {
   display:flex;
   align-items:center;
   justify-content:center;
+  flex-direction:column;
   overflow:hidden;
   cursor:pointer;
 }
 
+#intro-logo {
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  user-select:none;
+  animation:breathe 4s ease-in-out infinite;
+}
+
+.intro-elb {
+  font-family:'Great Vibes', cursive;
+  font-weight:400;
+  font-size:clamp(7rem,26vw,22rem);
+  letter-spacing:.02em;
+  line-height:.82;
+  color:#00f5ff;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 20px #00f5ff,
+    0 0 45px #00f5ff,
+    0 0 90px #00f5ff,
+    0 0 160px rgba(0,245,255,.7),
+    0 0 300px rgba(0,245,255,.35),
+    0 0 450px rgba(0,245,255,.15);
+  animation:neon-breathe-c 4s ease-in-out infinite;
+}
+
+.intro-ornament {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(.8rem,1.5vw,1.2rem);
+  letter-spacing:.6em;
+  color:rgba(255,0,170,.55);
+  text-shadow:0 0 14px rgba(255,0,170,.7), 0 0 35px rgba(255,0,170,.3);
+  animation:sub-breathe 4s ease-in-out infinite;
+  animation-delay:.3s;
+  padding:6px 0;
+}
+
+.intro-web {
+  font-family:'Great Vibes', cursive;
+  font-weight:400;
+  font-size:clamp(3.5rem,14vw,12rem);
+  letter-spacing:.05em;
+  line-height:.88;
+  color:#ff00aa;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 20px #ff00aa,
+    0 0 45px #ff00aa,
+    0 0 90px #ff00aa,
+    0 0 160px rgba(255,0,170,.7),
+    0 0 300px rgba(255,0,170,.35),
+    0 0 450px rgba(255,0,170,.15);
+  animation:neon-breathe-m 4s ease-in-out infinite;
+  animation-delay:.6s;
+}
+
+.intro-line {
+  width:clamp(160px,32vw,440px);
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,245,255,.7),rgba(255,0,170,.7),transparent);
+  margin:16px 0 10px;
+  animation:line-breathe 4s ease-in-out infinite;
+  animation-delay:.3s;
+}
+
+.intro-tagline {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(.85rem,1.6vw,1.2rem);
+  letter-spacing:.32em;
+  color:rgba(200,220,255,.42);
+  text-align:center;
+  animation:sub-breathe 4s ease-in-out infinite;
+  animation-delay:.8s;
+  line-height:2.4;
+  text-transform:uppercase;
+}
+
+.intro-tagline span {
+  color:rgba(0,245,255,.6);
+  font-style:normal;
+  letter-spacing:.45em;
+}
+
+.intro-sub {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(.75rem,1.1vw,.95rem);
+  letter-spacing:.3em;
+  color:rgba(0,245,255,.35);
+  animation:sub-breathe 4s ease-in-out infinite;
+  animation-delay:.9s;
+  text-transform:uppercase;
+}
+
+.intro-enter {
+  position:absolute;
+  bottom:36px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:1rem;
+  letter-spacing:.3em;
+  color:rgba(0,245,255,.32);
+  animation:blink-enter 1.8s ease-in-out infinite;
+  white-space:nowrap;
+  text-transform:uppercase;
+}
+
+/* Particle canvas behind logo */
 #intro-canvas {
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-}
-
-.intro-skip {
-  position:absolute;
-  bottom:32px;
-  right:32px;
-  font-family:'Orbitron',sans-serif;
-  font-size:.65rem;
-  letter-spacing:.15em;
-  color:rgba(255,255,255,.35);
-  text-transform:uppercase;
-  animation:blink-skip 1.5s ease infinite;
   pointer-events:none;
 }
-@keyframes blink-skip {
-  0%,100%{opacity:.35} 50%{opacity:.7}
+
+/* Vignette */
+#intro::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.7) 100%);
+  pointer-events:none;
 }
 
-.intro-click {
-  position:absolute;
-  bottom:32px;
-  left:50%;
-  transform:translateX(-50%);
-  font-family:'Orbitron',sans-serif;
-  font-size:.7rem;
-  letter-spacing:.2em;
-  color:rgba(0,245,255,.6);
-  text-transform:uppercase;
-  animation:blink-skip 1s ease infinite;
-  display:none;
+@keyframes breathe {
+  0%,100% { transform:scale(1);    filter:brightness(1); }
+  50%      { transform:scale(1.06); filter:brightness(1.15); }
+}
+
+@keyframes neon-breathe-c {
+  0%,100% {
+    text-shadow:
+      0 0 6px #fff,
+      0 0 15px #00f5ff,
+      0 0 35px #00f5ff,
+      0 0 70px rgba(0,245,255,.6),
+      0 0 130px rgba(0,245,255,.3);
+    opacity:.75;
+  }
+  50% {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 25px #00f5ff,
+      0 0 55px #00f5ff,
+      0 0 110px #00f5ff,
+      0 0 200px rgba(0,245,255,.85),
+      0 0 350px rgba(0,245,255,.45),
+      0 0 500px rgba(0,245,255,.2);
+    opacity:1;
+  }
+}
+
+@keyframes neon-breathe-m {
+  0%,100% {
+    text-shadow:
+      0 0 6px #fff,
+      0 0 15px #ff00aa,
+      0 0 35px #ff00aa,
+      0 0 70px rgba(255,0,170,.6),
+      0 0 130px rgba(255,0,170,.3);
+    opacity:.72;
+  }
+  50% {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 25px #ff00aa,
+      0 0 55px #ff00aa,
+      0 0 110px #ff00aa,
+      0 0 200px rgba(255,0,170,.85),
+      0 0 350px rgba(255,0,170,.45),
+      0 0 500px rgba(255,0,170,.2);
+    opacity:1;
+  }
+}
+
+@keyframes line-breathe {
+  0%,100% { opacity:.3; transform:scaleX(.8); }
+  50%      { opacity:1;  transform:scaleX(1); }
+}
+
+@keyframes sub-breathe {
+  0%,100% { opacity:.3; letter-spacing:.3em; }
+  50%      { opacity:.8; letter-spacing:.35em; }
+}
+
+@keyframes blink-enter {
+  0%,100%{ opacity:.3; }
+  50%    { opacity:.8; }
 }
 
 /* Flash overlay */
@@ -131,7 +294,7 @@ body {
 
 .nav-logo-text {
   font-family:'Orbitron',sans-serif;
-  font-weight:900;
+  font-weight:400;
   font-size:1.4rem;
   letter-spacing:.05em;
   background:linear-gradient(135deg, var(--cyan), var(--magenta));
@@ -212,7 +375,7 @@ body {
   border-radius:8px;
   font-family:'Orbitron',sans-serif;
   font-size:.7rem;
-  font-weight:700;
+  font-weight:400;
   letter-spacing:.12em;
   text-transform:uppercase;
   color:#000;
@@ -332,7 +495,7 @@ body {
 h1 {
   font-family:'Orbitron',sans-serif;
   font-size:clamp(2.2rem,5.5vw,4.8rem);
-  font-weight:900;
+  font-weight:400;
   line-height:1.0;
   letter-spacing:-.01em;
   margin-bottom:24px;
@@ -374,7 +537,7 @@ h1 {
   color:var(--cyan);
   font-family:'Orbitron',sans-serif;
   font-size:.72rem;
-  font-weight:700;
+  font-weight:400;
   letter-spacing:.12em;
   text-transform:uppercase;
   text-decoration:none;
@@ -409,7 +572,7 @@ h1 {
   color:#000;
   font-family:'Orbitron',sans-serif;
   font-size:.72rem;
-  font-weight:700;
+  font-weight:400;
   letter-spacing:.12em;
   text-transform:uppercase;
   text-decoration:none;
@@ -437,7 +600,7 @@ h1 {
 .st-num {
   font-family:'Orbitron',sans-serif;
   font-size:1.8rem;
-  font-weight:900;
+  font-weight:400;
   letter-spacing:-.02em;
   background:linear-gradient(135deg,var(--cyan),var(--magenta));
   -webkit-background-clip:text;
@@ -462,8 +625,8 @@ h1 {
 
 /* ========== SECTIONS ========== */
 section { padding:70px 5%; }
-.s-eye { font-size:.68rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--cyan); margin-bottom:10px; text-shadow:0 0 10px rgba(0,245,255,.4); }
-.s-title { font-family:'Orbitron',sans-serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; letter-spacing:-.01em; line-height:1.1; }
+.s-eye { font-size:.68rem; font-weight:400; letter-spacing:.18em; text-transform:uppercase; color:var(--cyan); margin-bottom:10px; text-shadow:0 0 10px rgba(0,245,255,.4); }
+.s-title { font-family:'Orbitron',sans-serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:400; letter-spacing:-.01em; line-height:1.1; }
 .s-title .g { background:linear-gradient(135deg,var(--cyan),var(--magenta)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .s-desc { color:rgba(232,244,255,.5); font-size:.9rem; line-height:1.7; max-width:460px; margin-top:10px; font-weight:300; }
 
@@ -493,10 +656,10 @@ section { padding:70px 5%; }
 .svc:hover { border-color:rgba(0,245,255,.3); transform:translateY(-4px); box-shadow:0 0 30px rgba(0,245,255,.1), var(--glow-c); background:#0f1a30; }
 .svc:hover::after { transform:scaleX(1); }
 .svc-ico { width:44px; height:44px; background:rgba(0,245,255,.08); border:1px solid rgba(0,245,255,.2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; margin-bottom:18px; }
-.svc h3 { font-family:'Orbitron',sans-serif; font-size:.9rem; font-weight:700; letter-spacing:.04em; margin-bottom:10px; color:var(--white); }
+.svc h3 { font-family:'Orbitron',sans-serif; font-size:.9rem; font-weight:400; letter-spacing:.04em; margin-bottom:10px; color:var(--white); }
 .svc p { font-size:.845rem; color:rgba(232,244,255,.5); line-height:1.65; font-weight:300; }
 .svc-pills { display:flex; flex-wrap:wrap; gap:5px; margin-top:14px; }
-.pill { background:rgba(0,245,255,.06); border:1px solid rgba(0,245,255,.15); border-radius:3px; padding:3px 9px; font-size:.67rem; color:var(--cyan); font-weight:500; letter-spacing:.04em; }
+.pill { background:rgba(0,245,255,.06); border:1px solid rgba(0,245,255,.15); border-radius:3px; padding:3px 9px; font-size:.67rem; color:var(--cyan); font-weight:400; letter-spacing:.04em; }
 
 /* ========== PROCESS ========== */
 #process { background:var(--bg); }
@@ -506,18 +669,18 @@ section { padding:70px 5%; }
 .p-step:first-child { padding-top:0; }
 .p-step:last-child { border-bottom:none; }
 .p-step:hover { padding-left:10px; }
-.p-n { font-family:'Orbitron',sans-serif; font-size:.75rem; font-weight:700; color:var(--cyan); text-shadow:0 0 8px rgba(0,245,255,.5); padding-top:2px; width:28px; flex-shrink:0; }
-.p-step h4 { font-family:'Orbitron',sans-serif; font-weight:700; font-size:.85rem; letter-spacing:.04em; margin-bottom:6px; color:var(--white); }
+.p-n { font-family:'Orbitron',sans-serif; font-size:.75rem; font-weight:400; color:var(--cyan); text-shadow:0 0 8px rgba(0,245,255,.5); padding-top:2px; width:28px; flex-shrink:0; }
+.p-step h4 { font-family:'Orbitron',sans-serif; font-weight:400; font-size:.85rem; letter-spacing:.04em; margin-bottom:6px; color:var(--white); }
 .p-step p { font-size:.84rem; color:rgba(232,244,255,.5); line-height:1.65; font-weight:300; }
 .proc-vis { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column; gap:10px; box-shadow:0 0 40px rgba(0,245,255,.05); }
-.pv-lbl { font-size:.65rem; font-weight:600; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; }
-.pv-proj { font-family:'Orbitron',sans-serif; font-weight:700; font-size:.9rem; color:var(--white); margin-top:2px; margin-bottom:14px; }
+.pv-lbl { font-size:.65rem; font-weight:400; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; }
+.pv-proj { font-family:'Orbitron',sans-serif; font-weight:400; font-size:.9rem; color:var(--white); margin-top:2px; margin-bottom:14px; }
 .pv-card { background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:8px; padding:12px 14px; display:flex; align-items:center; gap:10px; transition:all .2s; }
 .pv-card:hover { border-color:rgba(0,245,255,.2); background:rgba(0,245,255,.04); }
 .pv-ico { width:28px; height:28px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:.85rem; flex-shrink:0; }
-.pv-card h5 { font-weight:500; font-size:.8rem; color:var(--white); margin-bottom:1px; }
+.pv-card h5 { font-weight:400; font-size:.8rem; color:var(--white); margin-bottom:1px; }
 .pv-card span { font-size:.7rem; color:var(--muted); }
-.pv-badge { margin-left:auto; font-size:.62rem; font-weight:600; padding:2px 7px; border-radius:3px; white-space:nowrap; letter-spacing:.04em; }
+.pv-badge { margin-left:auto; font-size:.62rem; font-weight:400; padding:2px 7px; border-radius:3px; white-space:nowrap; letter-spacing:.04em; }
 .done { background:rgba(0,255,128,.1); color:#00ff80; border:1px solid rgba(0,255,128,.2); }
 .active { background:rgba(0,245,255,.1); color:var(--cyan); border:1px solid rgba(0,245,255,.2); }
 .soon { background:rgba(255,255,255,.05); color:var(--muted); border:1px solid var(--border); }
@@ -535,17 +698,17 @@ section { padding:70px 5%; }
   box-shadow:0 0 40px rgba(0,245,255,.12), inset 0 0 40px rgba(0,245,255,.03);
   transform:scale(1.03);
 }
-.p-name { font-size:.65rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-family:'Orbitron',sans-serif; }
+.p-name { font-size:.65rem; font-weight:400; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-family:'Orbitron',sans-serif; }
 .plan-f .p-name { color:rgba(0,245,255,.6); }
-.p-pop { display:inline-block; background:linear-gradient(135deg,var(--cyan),var(--magenta)); color:#000; font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:3px; margin-bottom:7px; font-family:'Orbitron',sans-serif; }
-.p-price { font-family:'Orbitron',sans-serif; font-size:2.6rem; font-weight:900; letter-spacing:-.02em; color:var(--white); margin-bottom:4px; }
+.p-pop { display:inline-block; background:linear-gradient(135deg,var(--cyan),var(--magenta)); color:#000; font-size:.58rem; font-weight:400; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:3px; margin-bottom:7px; font-family:'Orbitron',sans-serif; }
+.p-price { font-family:'Orbitron',sans-serif; font-size:2.6rem; font-weight:400; letter-spacing:-.02em; color:var(--white); margin-bottom:4px; }
 .plan-f .p-price { background:linear-gradient(135deg,var(--cyan),var(--magenta)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .p-price sup { font-size:1rem; font-weight:400; }
 .p-desc { font-size:.83rem; color:rgba(232,244,255,.45); line-height:1.55; font-weight:300; margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid var(--border); }
 .p-feats { list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:22px; }
 .p-feats li { display:flex; align-items:flex-start; gap:8px; font-size:.84rem; color:rgba(232,244,255,.55); font-weight:300; }
 .ck { color:var(--cyan); font-size:.78rem; margin-top:2px; flex-shrink:0; text-shadow:0 0 6px var(--cyan); }
-.p-btn { width:100%; padding:12px; border-radius:6px; font-family:'Orbitron',sans-serif; font-weight:700; font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; border:none; transition:all .25s; }
+.p-btn { width:100%; padding:12px; border-radius:6px; font-family:'Orbitron',sans-serif; font-weight:400; font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; border:none; transition:all .25s; }
 .p-btn-o { background:transparent; border:1px solid rgba(0,245,255,.3)!important; color:var(--cyan); }
 .p-btn-o:hover { border-color:var(--cyan)!important; box-shadow:var(--glow-c); }
 .p-btn-g { background:linear-gradient(135deg,var(--cyan),var(--magenta)); color:#000; }
@@ -559,42 +722,42 @@ section { padding:70px 5%; }
 .t-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px 10px; text-align:center; transition:all .25s; cursor:default; }
 .t-card:hover { border-color:rgba(0,245,255,.3); box-shadow:0 0 20px rgba(0,245,255,.1); transform:translateY(-3px); }
 .t-ico { font-size:1.7rem; margin-bottom:6px; }
-.t-name { font-size:.68rem; font-weight:600; color:var(--muted); letter-spacing:.05em; }
+.t-name { font-size:.68rem; font-weight:400; color:var(--muted); letter-spacing:.05em; }
 
 /* ========== CONTACT ========== */
 #contact { background:var(--bg2); }
 .contact-layout { display:grid; grid-template-columns:1fr 1.5fr; gap:56px; margin-top:44px; align-items:start; }
-.c-left h3 { font-family:'Orbitron',sans-serif; font-size:1.1rem; font-weight:700; letter-spacing:.04em; margin-bottom:10px; }
+.c-left h3 { font-family:'Orbitron',sans-serif; font-size:1.1rem; font-weight:400; letter-spacing:.04em; margin-bottom:10px; }
 .c-left p { font-size:.875rem; color:rgba(232,244,255,.5); line-height:1.7; margin-bottom:24px; font-weight:300; }
 .c-items { display:flex; flex-direction:column; gap:10px; }
 .c-item { display:flex; align-items:center; gap:12px; padding:12px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px; transition:border-color .2s; }
 .c-item:hover { border-color:rgba(0,245,255,.3); }
 .c-ico { width:32px; height:32px; background:rgba(0,245,255,.08); border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:.9rem; flex-shrink:0; }
-.c-item strong { display:block; font-size:.73rem; font-weight:600; color:var(--white); letter-spacing:.04em; text-transform:uppercase; font-family:'Orbitron',sans-serif; }
+.c-item strong { display:block; font-size:.73rem; font-weight:400; color:var(--white); letter-spacing:.04em; text-transform:uppercase; font-family:'Orbitron',sans-serif; }
 .c-item span { font-size:.8rem; color:var(--muted); font-weight:300; }
 .form-wrap { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:30px; }
 .f-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .f-g { margin-bottom:14px; }
-.f-g label { display:block; font-size:.65rem; font-weight:600; color:var(--muted); margin-bottom:5px; letter-spacing:.1em; text-transform:uppercase; font-family:'Orbitron',sans-serif; }
+.f-g label { display:block; font-size:.65rem; font-weight:400; color:var(--muted); margin-bottom:5px; letter-spacing:.1em; text-transform:uppercase; font-family:'Orbitron',sans-serif; }
 .f-g input,.f-g select,.f-g textarea { width:100%; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:11px 13px; font-family:'Exo 2',sans-serif; font-size:.875rem; color:var(--white); outline:none; transition:border-color .25s,box-shadow .25s; appearance:none; font-weight:300; }
 .f-g input:focus,.f-g select:focus,.f-g textarea:focus { border-color:rgba(0,245,255,.5); box-shadow:0 0 0 3px rgba(0,245,255,.08); }
 .f-g input::placeholder,.f-g textarea::placeholder { color:var(--muted); }
 .f-g select option { background:var(--surface); }
 .f-g textarea { resize:none; height:90px; }
-.f-submit { width:100%; padding:14px; background:linear-gradient(135deg,var(--cyan),var(--magenta)); color:#000; border:none; border-radius:6px; font-family:'Orbitron',sans-serif; font-weight:700; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:all .25s; }
+.f-submit { width:100%; padding:14px; background:linear-gradient(135deg,var(--cyan),var(--magenta)); color:#000; border:none; border-radius:6px; font-family:'Orbitron',sans-serif; font-weight:400; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:all .25s; }
 .f-submit:hover { box-shadow:0 6px 30px rgba(0,245,255,.4); transform:translateY(-1px); }
 .f-note { font-size:.7rem; color:var(--muted); text-align:center; margin-top:8px; }
 .success-wrap { display:none; text-align:center; padding:44px 16px; }
 .success-wrap .s-ico { font-size:2.5rem; margin-bottom:10px; }
-.success-wrap h3 { font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:700; color:var(--cyan); margin-bottom:6px; text-shadow:var(--glow-c); }
+.success-wrap h3 { font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:400; color:var(--cyan); margin-bottom:6px; text-shadow:var(--glow-c); }
 .success-wrap p { font-size:.855rem; color:var(--muted); font-weight:300; }
 
 /* ========== FOOTER ========== */
 footer { background:#030508; border-top:1px solid var(--border); color:rgba(232,244,255,.4); padding:48px 5% 24px; }
 .f-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:36px; }
-.f-brand-name { font-family:'Orbitron',sans-serif; font-weight:900; font-size:1.1rem; background:linear-gradient(135deg,var(--cyan),var(--magenta)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
+.f-brand-name { font-family:'Orbitron',sans-serif; font-weight:400; font-size:1.1rem; background:linear-gradient(135deg,var(--cyan),var(--magenta)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
 .f-brand p { font-size:.82rem; line-height:1.65; font-weight:300; }
-.f-col h5 { font-family:'Orbitron',sans-serif; font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--white); margin-bottom:14px; }
+.f-col h5 { font-family:'Orbitron',sans-serif; font-size:.7rem; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--white); margin-bottom:14px; }
 .f-col ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
 .f-col ul a { font-size:.82rem; color:rgba(232,244,255,.35); text-decoration:none; transition:color .2s; font-weight:300; }
 .f-col ul a:hover { color:var(--cyan); text-shadow:0 0 8px rgba(0,245,255,.4); }
@@ -613,7 +776,7 @@ footer { background:#030508; border-top:1px solid var(--border); color:rgba(232,
 @keyframes popIn{from{transform:scale(.85) translateY(10px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
 .cb-head { background:var(--bg); border-bottom:1px solid var(--border); padding:16px 18px; display:flex; align-items:center; gap:12px; }
 .cb-av { width:36px; height:36px; background:linear-gradient(135deg,var(--cyan),var(--magenta)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.05rem; flex-shrink:0; }
-.cb-info strong { display:block; font-family:'Orbitron',sans-serif; font-size:.75rem; font-weight:700; color:var(--white); letter-spacing:.04em; }
+.cb-info strong { display:block; font-family:'Orbitron',sans-serif; font-size:.75rem; font-weight:400; color:var(--white); letter-spacing:.04em; }
 .cb-status { font-size:.68rem; color:#00ff80; display:flex; align-items:center; gap:4px; text-shadow:0 0 6px #00ff80; }
 .cb-status::before { content:''; width:5px; height:5px; border-radius:50%; background:#00ff80; box-shadow:0 0 6px #00ff80; }
 .cb-x { margin-left:auto; background:none; border:none; color:var(--muted); cursor:pointer; font-size:1rem; transition:color .2s; }
@@ -624,7 +787,7 @@ footer { background:#030508; border-top:1px solid var(--border); color:rgba(232,
 .msg.bot { background:var(--bg); border:1px solid var(--border); color:rgba(232,244,255,.8); align-self:flex-start; border-radius:3px 10px 10px 10px; }
 .msg.user { background:linear-gradient(135deg,rgba(0,245,255,.2),rgba(255,0,170,.2)); border:1px solid rgba(0,245,255,.3); color:var(--white); align-self:flex-end; border-radius:10px 10px 3px 10px; }
 .cb-chips { padding:0 14px 8px; display:flex; flex-wrap:wrap; gap:5px; }
-.cb-chip { background:rgba(0,245,255,.07); border:1px solid rgba(0,245,255,.2); color:var(--cyan); font-size:.7rem; font-weight:500; padding:5px 10px; border-radius:3px; cursor:pointer; font-family:'Orbitron',sans-serif; letter-spacing:.06em; transition:all .2s; }
+.cb-chip { background:rgba(0,245,255,.07); border:1px solid rgba(0,245,255,.2); color:var(--cyan); font-size:.7rem; font-weight:400; padding:5px 10px; border-radius:3px; cursor:pointer; font-family:'Orbitron',sans-serif; letter-spacing:.06em; transition:all .2s; }
 .cb-chip:hover { background:var(--cyan); color:#000; }
 .cb-inp-row { padding:10px 14px 14px; display:flex; gap:8px; border-top:1px solid var(--border); }
 .cb-inp { flex:1; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:8px 12px; font-family:'Exo 2',sans-serif; font-size:.83rem; color:var(--white); outline:none; transition:border-color .2s; font-weight:300; }
@@ -652,8 +815,6 @@ footer { background:#030508; border-top:1px solid var(--border); color:rgba(232,
 <!-- INTRO SCREEN -->
 <div id="intro">
   <canvas id="intro-canvas"></canvas>
-  <div class="intro-skip">Cliquez pour passer</div>
-  <div class="intro-click" id="intro-click">▶ Entrer</div>
 </div>
 
 <!-- SIDE NAV -->
@@ -907,12 +1068,12 @@ footer { background:#030508; border-top:1px solid var(--border); color:rgba(232,
 
 <script>
 /* ====================================================
-   INTRO ANIMATION — Flash/Macromedia style
+   INTRO — Handwriting effect + shrink to nav
    ==================================================== */
 const introEl = document.getElementById('intro');
 const c = document.getElementById('intro-canvas');
 const ctx = c.getContext('2d');
-let W, H, introPhase = 0, introT = 0, introStarted = false, introDone = false;
+let W, H, introDone = false;
 
 function resizeIntro() {
   W = c.width = window.innerWidth;
@@ -921,320 +1082,366 @@ function resizeIntro() {
 resizeIntro();
 window.addEventListener('resize', resizeIntro);
 
-// Audio context — son de synthé style flash
+// Audio
 let audioCtx = null;
 function initAudio() {
   if(audioCtx) return;
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 }
-
-function playTone(freq, start, dur, type='sine', gain=0.3) {
+function playTone(freq, start, dur, type='sine', gain=0.15) {
   if(!audioCtx) return;
   const o = audioCtx.createOscillator();
   const g = audioCtx.createGain();
   o.connect(g); g.connect(audioCtx.destination);
-  o.type = type;
-  o.frequency.setValueAtTime(freq, audioCtx.currentTime + start);
+  o.type = type; o.frequency.value = freq;
   g.gain.setValueAtTime(0, audioCtx.currentTime + start);
-  g.gain.linearRampToValueAtTime(gain, audioCtx.currentTime + start + 0.02);
-  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + start + dur);
+  g.gain.linearRampToValueAtTime(gain, audioCtx.currentTime + start + .05);
+  g.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + start + dur);
   o.start(audioCtx.currentTime + start);
-  o.stop(audioCtx.currentTime + start + dur + 0.1);
+  o.stop(audioCtx.currentTime + start + dur + .1);
 }
 
-function playIntroSound() {
-  initAudio();
-  // Séquence style Flash/synthé
-  playTone(220,  0,   0.3, 'sawtooth', 0.15);
-  playTone(440,  0.1, 0.3, 'sawtooth', 0.12);
-  playTone(880,  0.2, 0.4, 'sawtooth', 0.1);
-  playTone(660,  0.35,0.5, 'sine',     0.2);
-  playTone(1320, 0.5, 0.4, 'sine',     0.18);
-  playTone(880,  0.7, 0.3, 'triangle', 0.15);
-  playTone(1760, 0.9, 0.6, 'sine',     0.25);
-  playTone(2200, 1.1, 0.4, 'sine',     0.2);
-  // Chord final
-  [440,550,660,880].forEach((f,i)=>playTone(f, 1.4+i*0.05, 1.2, 'sine', 0.1));
+// ── Ambient particles ──
+const pts = [];
+for(let i=0;i<50;i++) pts.push({
+  x:Math.random()*3000, y:Math.random()*2000,
+  vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35,
+  r:.6+Math.random()*1.8,
+  col:Math.random()>.5?'#00f5ff':'#ff00aa',
+  a:.1+Math.random()*.3
+});
+
+function drawParticles() {
+  pts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+    if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+    ctx.save();
+    ctx.globalAlpha=p.a;
+    ctx.fillStyle=p.col;
+    ctx.shadowBlur=8; ctx.shadowColor=p.col;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  });
 }
 
-// Particules / rayons
-const rays = [];
-for(let i=0;i<24;i++) rays.push({ angle: (i/24)*Math.PI*2, speed: 2+Math.random()*4, len:0, maxLen:0, color:i%2===0?'#00f5ff':'#ff00aa' });
-
-const particles = [];
-function spawnParticles(x,y,count,color) {
-  for(let i=0;i<count;i++) {
-    const a = Math.random()*Math.PI*2;
-    const s = 2+Math.random()*6;
-    particles.push({ x,y, vx:Math.cos(a)*s, vy:Math.sin(a)*s, life:1, color, size:1+Math.random()*3 });
-  }
+// ── Text measurer ──
+function measureText(txt, size) {
+  const el = document.createElement('canvas');
+  const cx = el.getContext('2d');
+  cx.font = getFontString(size);
+  return cx.measureText(txt).width;
 }
 
-let logoAngle = 0, logoScale = 0, logoAlpha = 0, textAlpha = 0;
-let phase = 0; // 0=build 1=spin 2=flash 3=done
-let phasT = 0;
-let introClickable = false;
+// ── State machine ──
+// Phase 0: write ELB  (0 → ~2.5s)
+// Phase 1: pause      (~2.5s → ~3s)
+// Phase 2: write web  (~3s → ~5.5s)
+// Phase 3: pause      (~5.5s → ~6s)
+// Phase 4: write .ca  (~6s → ~7s)
+// Phase 5: breathe    (~7s → ~9s)
+// Phase 6: shrink+fade→ site
 
-function drawIntro(ts) {
-  if(introDone) return;
-  introT = ts * 0.001;
-  phasT += 0.016;
+let phase = 0;
+let phaseT = 0;         // time within current phase
+let startTime = null;
+let writtenELB = 0;     // 0..1 progress of ELB text reveal
+let writtenWeb = 0;
+let writtenCa  = 0;
+let breathT    = 0;
+let shrinkT    = 0;
 
-  ctx.fillStyle = `rgba(0,0,0,${phase < 2 ? 0.12 : 0.25})`;
-  ctx.fillRect(0,0,W,H);
+// Duration constants (seconds)
+const D_ELB    = 2.6;
+const D_PAUSE1 = 0.5;
+const D_WEB    = 2.4;
+const D_PAUSE2 = 0.5;
+const D_CA     = 1.0;
+const D_BREATH = 2.2;
+const D_SHRINK = 1.4;
 
-  const cx = W/2, cy = H/2;
+// ── Ensure font loads before starting (works online + offline fallback) ──
+const FONT_FAMILY = 'Great Vibes';
+const FONT_FALLBACK = 'Georgia, serif';
+let FONT = `"${FONT_FAMILY}", ${FONT_FALLBACK}`;
 
-  // Phase 0: build-up (0-1.5s)
-  if(phase === 0) {
-    if(phasT > 0.5 && !introStarted) {
-      introStarted = true;
-      playIntroSound();
-    }
-    logoScale = Math.min(1, phasT * 0.8);
-    logoAlpha = Math.min(1, phasT * 1.2);
+// Test if Great Vibes loaded, fallback to Georgia if not
+function getFontString(size) {
+  return `400 ${size}px ${FONT}`;
+}
 
-    // Rayons qui grandissent
-    const maxR = Math.sqrt(W*W+H*H)/2;
-    rays.forEach((r,i) => {
-      r.maxLen = maxR * Math.min(1, phasT * 0.6);
-      r.len = r.maxLen;
-      const x2 = cx + Math.cos(r.angle + phasT*0.3)*r.len;
-      const y2 = cy + Math.sin(r.angle + phasT*0.3)*r.len;
-      ctx.save();
-      ctx.globalAlpha = 0.08 * logoAlpha;
-      const grad = ctx.createLinearGradient(cx,cy,x2,y2);
-      grad.addColorStop(0,r.color);
-      grad.addColorStop(1,'transparent');
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x2,y2); ctx.stroke();
-      ctx.restore();
+// Pre-warm font (forces browser to load it)
+function warmFont(cb) {
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load(`400 120px "${FONT_FAMILY}"`).then(() => {
+      cb();
+    }).catch(() => {
+      FONT = FONT_FALLBACK;
+      cb();
     });
-
-    if(phasT > 1.5) { phase=1; phasT=0; }
+    // Timeout fallback — if font doesn't load in 2s, use fallback
+    setTimeout(() => cb(), 2000);
+  } else {
+    setTimeout(cb, 300);
   }
-
-  // Phase 1: spin + zoom (1.5-3s)
-  if(phase === 1) {
-    logoAngle += 0.08;
-    logoScale = 0.6 + 0.6 * Math.sin(phasT * 2);
-    if(logoScale > 1.2) logoScale = 1.2;
-
-    // Rayons tournants
-    rays.forEach((r,i) => {
-      const angle = r.angle + logoAngle * 0.5 + i * 0.05;
-      const len = (Math.sqrt(W*W+H*H)/2) * (0.5 + 0.5*Math.sin(phasT*3+i));
-      const x2 = cx + Math.cos(angle)*len;
-      const y2 = cy + Math.sin(angle)*len;
-      ctx.save();
-      ctx.globalAlpha = 0.12;
-      const grad = ctx.createLinearGradient(cx,cy,x2,y2);
-      grad.addColorStop(0,r.color);
-      grad.addColorStop(1,'transparent');
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x2,y2); ctx.stroke();
-      ctx.restore();
-    });
-
-    spawnParticles(cx,cy,2, Math.random()>.5?'#00f5ff':'#ff00aa');
-
-    if(phasT > 1.5) { phase=2; phasT=0; }
-  }
-
-  // Phase 2: zoom in + flash
-  if(phase === 2) {
-    logoScale = 1 + phasT * 3;
-    logoAlpha = Math.max(0, 1 - phasT * 2);
-    // Big flash
-    ctx.save();
-    ctx.globalAlpha = Math.max(0, 0.9 - phasT * 3);
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0,0,W,H);
-    ctx.restore();
-    if(phasT > 0.5) { phase=3; phasT=0; textAlpha=0; }
-  }
-
-  // Phase 3: show "Entrer"
-  if(phase === 3) {
-    logoScale = 1;
-    logoAlpha = 1;
-    textAlpha = Math.min(1, phasT * 2);
-    if(!introClickable) {
-      introClickable = true;
-      document.getElementById('intro-click').style.display = 'block';
-    }
-    // Ambient rays
-    const t2 = introT;
-    rays.forEach((r,i) => {
-      const angle = r.angle + t2*0.15;
-      const len = (Math.sqrt(W*W+H*H)/2) * 0.7;
-      const x2 = cx + Math.cos(angle)*len;
-      const y2 = cy + Math.sin(angle)*len;
-      ctx.save();
-      ctx.globalAlpha = 0.06 + 0.03*Math.sin(t2+i);
-      const grad = ctx.createLinearGradient(cx,cy,x2,y2);
-      grad.addColorStop(0,r.color);
-      grad.addColorStop(1,'transparent');
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x2,y2); ctx.stroke();
-      ctx.restore();
-    });
-  }
-
-  // Update + draw particles
-  for(let i=particles.length-1;i>=0;i--) {
-    const p = particles[i];
-    p.x += p.vx; p.y += p.vy;
-    p.vx *= 0.95; p.vy *= 0.95;
-    p.life -= 0.02;
-    if(p.life<=0){particles.splice(i,1);continue;}
-    ctx.save();
-    ctx.globalAlpha = p.life * 0.8;
-    ctx.fillStyle = p.color;
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = p.color;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  // Draw logo
-  if(logoAlpha > 0) {
-    ctx.save();
-    ctx.globalAlpha = logoAlpha;
-    ctx.translate(cx, cy);
-    ctx.rotate(logoAngle);
-    ctx.scale(logoScale, logoScale);
-    drawLogoShape(ctx, 0, 0, 80 + 20*Math.sin(introT*2));
-    ctx.restore();
-
-    // Logo text below
-    ctx.save();
-    ctx.globalAlpha = logoAlpha * (phase >= 1 ? 1 : Math.min(1,phasT*2));
-    ctx.font = `900 ${Math.floor(48*Math.min(1,logoScale))}px Orbitron,sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    const grad2 = ctx.createLinearGradient(cx-100,cy+100,cx+100,cy+100);
-    grad2.addColorStop(0,'#00f5ff');
-    grad2.addColorStop(1,'#ff00aa');
-    ctx.fillStyle = grad2;
-    ctx.shadowBlur = 30;
-    ctx.shadowColor = '#00f5ff';
-    ctx.fillText('ELBweb', cx, cy + 110);
-    ctx.font = `400 13px Exo 2,sans-serif`;
-    ctx.fillStyle = 'rgba(232,244,255,0.5)';
-    ctx.shadowBlur = 0;
-    ctx.letterSpacing = '0.2em';
-    ctx.fillText('AGENCE WEB · MONTRÉAL', cx, cy + 140);
-    ctx.restore();
-  }
-
-  if(phase < 3) requestAnimationFrame(drawIntro);
-  else requestAnimationFrame(drawIntro);
 }
-requestAnimationFrame(drawIntro);
 
-function drawLogoShape(ctx, x, y, size) {
-  // ELB logo: triangle doublé style flash avec dégradé
-  const s = size;
+function easeInOut(t) { return t<.5 ? 2*t*t : -1+(4-2*t)*t; }
+function easeOut(t)   { return 1 - Math.pow(1-t, 3); }
+
+// Draw clipped text (reveals left→right like being written)
+function drawTextReveal(txt, x, y, size, color, progress, glowColor) {
+  if(progress <= 0) return;
   ctx.save();
-
-  // Outer glow ring
+  const fullW = measureText(txt, size) * 1.15;
   ctx.beginPath();
-  ctx.arc(x,y,s*0.9,0,Math.PI*2);
-  const glow = ctx.createRadialGradient(x,y,s*0.3,x,y,s*1.2);
-  glow.addColorStop(0,'rgba(0,245,255,0.15)');
-  glow.addColorStop(0.5,'rgba(255,0,170,0.08)');
-  glow.addColorStop(1,'transparent');
-  ctx.fillStyle = glow;
-  ctx.fill();
-
-  // Outer ring
-  ctx.beginPath();
-  ctx.arc(x,y,s*0.75,0,Math.PI*2);
-  ctx.strokeStyle = `rgba(0,245,255,0.6)`;
-  ctx.lineWidth = 1.5;
-  ctx.shadowBlur = 20;
-  ctx.shadowColor = '#00f5ff';
-  ctx.stroke();
-
-  // Inner ring
-  ctx.beginPath();
-  ctx.arc(x,y,s*0.55,0,Math.PI*2);
-  ctx.strokeStyle = `rgba(255,0,170,0.5)`;
-  ctx.lineWidth = 1;
-  ctx.shadowColor = '#ff00aa';
-  ctx.stroke();
-
-  // Main triangle (E shape)
-  ctx.beginPath();
-  ctx.moveTo(x, y - s*0.45);
-  ctx.lineTo(x + s*0.4, y + s*0.25);
-  ctx.lineTo(x - s*0.4, y + s*0.25);
-  ctx.closePath();
-  const triGrad = ctx.createLinearGradient(x,y-s*0.45,x,y+s*0.25);
-  triGrad.addColorStop(0,'#00f5ff');
-  triGrad.addColorStop(1,'#ff00aa');
-  ctx.fillStyle = triGrad;
-  ctx.shadowBlur = 30;
-  ctx.shadowColor = '#00f5ff';
-  ctx.fill();
-
-  // Inner triangle
-  ctx.beginPath();
-  ctx.moveTo(x, y - s*0.2);
-  ctx.lineTo(x + s*0.18, y + s*0.12);
-  ctx.lineTo(x - s*0.18, y + s*0.12);
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(0,0,0,0.7)';
-  ctx.shadowBlur = 0;
-  ctx.fill();
-
-  // Center dot
-  ctx.beginPath();
-  ctx.arc(x, y-s*0.04, s*0.06, 0, Math.PI*2);
-  ctx.fillStyle = '#fff';
-  ctx.shadowBlur = 15;
-  ctx.shadowColor = '#fff';
-  ctx.fill();
-
+  ctx.rect(x - fullW * .05, y - size * 1.1, fullW * Math.min(progress, 1) + size * 0.3, size * 1.5);
+  ctx.clip();
+  ctx.font = getFontString(size);
+  ctx.fillStyle = color;
+  ctx.textBaseline = 'alphabetic';
+  ctx.textAlign = 'center';
+  ctx.shadowBlur = 35; ctx.shadowColor = glowColor;
+  ctx.fillText(txt, x, y);
+  ctx.shadowBlur = 60; ctx.shadowColor = glowColor;
+  ctx.globalAlpha *= .5;
+  ctx.fillText(txt, x, y);
   ctx.restore();
 }
 
-// Click/touch to dismiss intro
-introEl.addEventListener('click', dismissIntro);
-introEl.addEventListener('touchend', dismissIntro);
+// Draw pen nib cursor at writing edge
+function drawPen(x, y, color) {
+  ctx.save();
+  ctx.globalAlpha = .85;
+  ctx.fillStyle = '#fff';
+  ctx.shadowBlur = 18; ctx.shadowColor = color;
+  ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI*2); ctx.fill();
+  // trailing glow streak
+  const grad = ctx.createRadialGradient(x,y,0,x,y,18);
+  grad.addColorStop(0, color.replace(')',',0.6)').replace('rgb','rgba').replace('#00f5ff','rgba(0,245,255,0.6)').replace('#ff00aa','rgba(255,0,170,0.6)'));
+  grad.addColorStop(1,'transparent');
+  ctx.fillStyle = color==='#00f5ff' ? 'rgba(0,245,255,0.15)' : 'rgba(255,0,170,0.15)';
+  ctx.beginPath(); ctx.arc(x,y,18,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+// Get x position of pen tip based on progress through text
+function getPenX(txt, size, centerX, progress) {
+  const fullW = measureText(txt, size);
+  return centerX - fullW/2 + fullW * Math.min(progress, 1);
+}
+
+function introLoop(ts) {
+  if(introDone) return;
+  if(!startTime) { startTime = ts; initAudio(); }
+  const elapsed = (ts - startTime) / 1000;
+
+  W = c.width; H = c.height;
+  ctx.clearRect(0,0,W,H);
+  drawParticles();
+
+  const cx = W/2;
+  const cy = H/2;
+
+  // Dynamic font sizes (recalc each frame for resize)
+  const elbSz = Math.min(W * .26, 240);
+  const webSz = Math.min(W * .15, 140);
+  const caSz  = Math.min(W * .085, 78);
+
+  // Layout: ELB centered, web below
+  const elbY   = cy - webSz * .3;
+  const webY   = cy + elbSz * .55;
+  const webW   = measureText('web', webSz);
+  const caX    = cx + webW/2 * .9 + caSz * .55;
+  const caY    = webY;
+
+  // ── Phase timing ──
+  if(elapsed < D_ELB) {
+    // Phase 0: write ELB
+    writtenELB = easeOut(elapsed / D_ELB);
+    if(elapsed > .1 && elapsed < D_ELB - .1) {
+      // subtle pen sound ticks
+      if(Math.floor(elapsed * 8) > Math.floor((elapsed-.016) * 8)) {
+        playTone(800 + Math.random()*400, 0, .06, 'sine', .04);
+      }
+    }
+  } else if(elapsed < D_ELB + D_PAUSE1) {
+    // Phase 1: pause after ELB
+    writtenELB = 1;
+  } else if(elapsed < D_ELB + D_PAUSE1 + D_WEB) {
+    // Phase 2: write web
+    writtenELB = 1;
+    writtenWeb = easeOut((elapsed - D_ELB - D_PAUSE1) / D_WEB);
+    if(Math.floor(elapsed * 7) > Math.floor((elapsed-.016) * 7)) {
+      playTone(600 + Math.random()*300, 0, .07, 'sine', .04);
+    }
+  } else if(elapsed < D_ELB + D_PAUSE1 + D_WEB + D_PAUSE2) {
+    // Phase 3: pause after web
+    writtenELB = 1; writtenWeb = 1;
+  } else if(elapsed < D_ELB + D_PAUSE1 + D_WEB + D_PAUSE2 + D_CA) {
+    // Phase 4: write .ca
+    writtenELB = 1; writtenWeb = 1;
+    writtenCa = easeOut((elapsed - D_ELB - D_PAUSE1 - D_WEB - D_PAUSE2) / D_CA);
+    if(Math.floor(elapsed * 9) > Math.floor((elapsed-.016) * 9)) {
+      playTone(1000 + Math.random()*500, 0, .05, 'sine', .04);
+    }
+  } else if(elapsed < D_ELB + D_PAUSE1 + D_WEB + D_PAUSE2 + D_CA + D_BREATH) {
+    // Phase 5: breathe
+    writtenELB = 1; writtenWeb = 1; writtenCa = 1;
+    breathT = (elapsed - D_ELB - D_PAUSE1 - D_WEB - D_PAUSE2 - D_CA) / D_BREATH;
+  } else {
+    // Phase 6: auto dismiss
+    if(!introDone) dismissIntro();
+    return;
+  }
+
+  // ── Breathing pulse ──
+  const breath = phase >= 5 ? .5 + .5 * Math.sin(breathT * Math.PI * 2) : 1;
+  const glowMult = .7 + .3 * breath;
+
+  // ── Draw ELB ──
+  if(writtenELB > 0) {
+    ctx.save();
+    ctx.globalAlpha = Math.min(1, writtenELB * 2) * (.75 + .25 * glowMult);
+    const elbW = measureText('ELB', elbSz);
+    drawTextReveal('ELB', cx, elbY, elbSz, '#00f5ff', writtenELB, '#00f5ff');
+
+    // pen nib
+    if(writtenELB < 1) {
+      const penPX = cx - elbW/2 + elbW * writtenELB;
+      drawPen(penPX, elbY - elbSz * .15, '#00f5ff');
+    }
+    ctx.restore();
+  }
+
+  // ── Draw web ──
+  if(writtenWeb > 0) {
+    ctx.save();
+    ctx.globalAlpha = Math.min(1, writtenWeb * 2) * (.75 + .25 * glowMult);
+    drawTextReveal('web', cx, webY, webSz, '#ff00aa', writtenWeb, '#ff00aa');
+
+    if(writtenWeb < 1) {
+      const wW = measureText('web', webSz);
+      const penPX = cx - wW/2 + wW * writtenWeb;
+      drawPen(penPX, webY - webSz * .12, '#ff00aa');
+    }
+    ctx.restore();
+  }
+
+  // ── Draw .ca ──
+  if(writtenCa > 0) {
+    ctx.save();
+    ctx.globalAlpha = Math.min(1, writtenCa * 2.5) * (.7 + .3 * glowMult);
+    const caW = measureText('.ca', caSz);
+    drawTextReveal('.ca', caX, caY, caSz, 'rgba(0,245,255,0.8)', writtenCa, '#00f5ff');
+
+    if(writtenCa < 1) {
+      const penPX = caX - caW/2 + caW * writtenCa;
+      drawPen(penPX, caY - caSz * .1, '#00f5ff');
+    }
+    ctx.restore();
+  }
+
+  // ── Tagline fades in after web is written ──
+  if(writtenWeb > 0.9) {
+    const tagAlpha = Math.min(1, (writtenWeb - 0.9) / .3) * (.4 + .2 * glowMult);
+    ctx.save();
+    ctx.globalAlpha = tagAlpha;
+    ctx.font = `300 italic ${Math.min(W*.018, 16)}px 'Cormorant Garamond', Georgia, serif`;
+    ctx.fillStyle = 'rgba(200,220,255,1)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'alphabetic';
+    ctx.letterSpacing = '0.3em';
+    ctx.fillText('Typographie  ·  Médiengestaltung  ·  Design Web', cx, webY + webSz * .55);
+    ctx.restore();
+  }
+
+  requestAnimationFrame(introLoop);
+}
+
+// Wait for font then start
+warmFont(() => requestAnimationFrame(introLoop));
 
 function dismissIntro() {
   if(introDone) return;
   introDone = true;
   initAudio();
-  // Flash blanc
-  const fl = document.getElementById('flash');
-  fl.style.opacity = '1';
-  setTimeout(()=>{
-    fl.style.transition = 'opacity 0.6s';
-    fl.style.opacity = '0';
-  }, 80);
-  // Son de transition
-  playTone(880, 0, 0.1, 'sine', 0.3);
-  playTone(1760, 0.05, 0.2, 'sine', 0.2);
-  // Slide out intro
-  introEl.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-  introEl.style.opacity = '0';
-  introEl.style.transform = 'scale(1.08)';
-  setTimeout(()=>{
-    introEl.style.display = 'none';
-    document.getElementById('site').classList.add('visible');
-    startHeroBg();
-    // Start counters
-    document.querySelectorAll('.st-num[data-target]').forEach(countUp);
-  }, 700);
+
+  // Rising chord on exit
+  playTone(440,  0,   .3,  'sine', .15);
+  playTone(554,  .06, .3,  'sine', .12);
+  playTone(659,  .12, .35, 'sine', .1);
+  playTone(880,  .2,  .4,  'sine', .08);
+
+  // Shrink logo towards top-left nav area, then fade
+  const navLogo = document.querySelector('.nav-logo-area');
+  const navRect = navLogo ? navLogo.getBoundingClientRect() : {left:20, top:20};
+
+  introEl.style.transition = 'none';
+
+  let shrinkStart = null;
+  function shrinkLoop(ts) {
+    if(!shrinkStart) shrinkStart = ts;
+    const t = Math.min((ts - shrinkStart) / (D_SHRINK * 1000), 1);
+    const e = easeInOut(t);
+
+    W = c.width; H = c.height;
+    ctx.clearRect(0,0,W,H);
+
+    // Particles fade
+    ctx.save();
+    ctx.globalAlpha = 1 - e;
+    drawParticles();
+    ctx.restore();
+
+    // Scale + translate towards nav
+    const scaleF = 1 - e * .88;
+    const tx = (navRect.left + 60 - W/2) * e;
+    const ty = (navRect.top  + 30 - H/2) * e;
+
+    ctx.save();
+    ctx.translate(W/2 + tx, H/2 + ty);
+    ctx.scale(scaleF, scaleF);
+    ctx.translate(-W/2, -H/2);
+
+    const elbSz = Math.min(W*.26,240);
+    const webSz = Math.min(W*.15,140);
+    const caSz  = Math.min(W*.085,78);
+    const elbY  = H/2 - webSz*.3;
+    const webY  = H/2 + elbSz*.55;
+    const webW  = measureText('web', webSz);
+    const caX   = W/2 + webW/2*.9 + caSz*.55;
+
+    ctx.globalAlpha = 1 - e;
+    drawTextReveal('ELB', W/2, elbY, elbSz, '#00f5ff', 1, '#00f5ff');
+    drawTextReveal('web', W/2, webY, webSz, '#ff00aa', 1, '#ff00aa');
+    drawTextReveal('.ca', caX,  webY, caSz,  'rgba(0,245,255,0.8)', 1, '#00f5ff');
+    ctx.restore();
+
+    if(t < 1) {
+      requestAnimationFrame(shrinkLoop);
+    } else {
+      introEl.style.transition = 'opacity .5s ease';
+      introEl.style.opacity = '0';
+      setTimeout(()=>{
+        introEl.style.display = 'none';
+        document.getElementById('site').classList.add('visible');
+        startHeroBg();
+        document.querySelectorAll('.st-num[data-target]').forEach(countUp);
+      }, 500);
+    }
+  }
+  requestAnimationFrame(shrinkLoop);
 }
+
+// Click to skip ahead
+introEl.addEventListener('click', ()=>{
+  if(introDone) return;
+  // If still writing, jump to breathe phase then dismiss
+  writtenELB = 1; writtenWeb = 1; writtenCa = 1;
+  setTimeout(dismissIntro, 600);
+});
+introEl.addEventListener('touchend', e=>{ e.preventDefault(); introEl.click(); });
 
 /* ====================================================
    HERO BACKGROUND PARTICLES
@@ -1364,16 +1571,4 @@ function toggleBot(){
   else{b.classList.remove('open');btn.innerHTML='<div class="b-live"></div>💬';}
 }
 function sendMsg(){
-  const i=document.getElementById('cb-in'),t=i.value.trim();
-  if(!t)return; addMsg(t,'user'); i.value='';
-  document.getElementById('cb-chips').style.display='none';
-  setTimeout(()=>addMsg(getR(t),'bot'),600);
-}
-function chip(t){
-  addMsg(t,'user');
-  document.getElementById('cb-chips').style.display='none';
-  setTimeout(()=>addMsg(getR(t),'bot'),600);
-}
-</script>
-</body>
-</html>
+  const i=document.getElementByI
